@@ -1,0 +1,27 @@
+# The Blueprint of the free Render web service that runs the Docker image of this project (the Dockerfile in this folder).
+# Written once by `pisa init` because the architecture description has `deploy render`; change it as you like, `pisa init --force` leaves it alone.
+#
+# The first time, by hand:
+#   1. Push the project to GitHub.
+#   2. dashboard.render.com > New > Blueprint > pick the repository. Render looks for render.yaml by default: enter render.yml in the field "Blueprint Path".
+#   3. Service > Settings > Deploy Hook: copy the URL and keep it in the GitHub secret RENDER_DEPLOY_HOOK_URL
+#      (repository > Settings > Secrets and variables > Actions). The URL is secret: never write it into a file.
+#   4. A tag v... starts .github/workflows/cd.yml, which calls the deploy hook. Nothing else deploys (autoDeployTrigger: off).
+#
+# The free plan: the service sleeps after 15 minutes without requests (waking up takes about a minute), has 750 instance hours per
+# month and no persistent disk: the data of H2 is gone whenever the service restarts or sleeps.
+services:
+  - type: web
+    name: adressen-spring
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    autoDeployTrigger: "off"
+    healthCheckPath: /login.html
+    envVars:
+      - key: PORT
+        value: "8080"
+      # The JVM sizes its heap from the memory of the free instance
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:MaxRAMPercentage=75"

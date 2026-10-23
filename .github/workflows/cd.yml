@@ -1,0 +1,21 @@
+# Deploys to Render when a tag v* is pushed: calls the deploy hook of the service (render.yml). Written once by `pisa init` because the
+# architecture description has `deploy render`; change it as you like, `pisa init --force` leaves it alone.
+# The deploy hook is a secret: Render > the service > Settings > Deploy Hook, then GitHub > Settings > Secrets and variables > Actions >
+# RENDER_DEPLOY_HOOK_URL.
+name: Deploy
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the deploy hook of the Render service
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          test -n "$RENDER_DEPLOY_HOOK_URL" || { echo "The secret RENDER_DEPLOY_HOOK_URL is missing (see the comment at the top of this file)."; exit 1; }
+          curl -fsS "${RENDER_DEPLOY_HOOK_URL}&ref=${GITHUB_SHA}"
+

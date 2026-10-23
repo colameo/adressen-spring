@@ -446,6 +446,110 @@
           "sha256": "6036aebd3f71ae616a37373ba989abdd62644db1e583e2b14276508660936bc9"
         }
       ]
+    },
+    {
+      "n": 4,
+      "command": "init",
+      "argv": [
+        "init",
+        "--target",
+        "spring-boot",
+        "--out",
+        ".",
+        "--group",
+        "ch.example",
+        "--artifact",
+        "adressen-spring",
+        "--package",
+        "ch.example.adressen",
+        "--java",
+        "25",
+        "--adl",
+        "spec/architecture.adl",
+        "--force"
+      ],
+      "pisa": "pisa 0.13.0 (development run, no build timestamp)",
+      "inputs": [
+        {
+          "path": "spec/architecture.adl",
+          "sha256": "a66b9be8f5eefaf13fe51c6a3da87b56a4076b60aa63c25a9ec9ef3d9b234825"
+        }
+      ],
+      "templates": [],
+      "outputs": [
+        {
+          "path": ".github/workflows/cd.yml",
+          "sha256": "5b3c76cbf829d3ac629f327d6eaeac1324841aa3d50d0aa1ae3ff9940205a20f"
+        },
+        {
+          "path": ".github/workflows/release.yml",
+          "sha256": "7bf34e40ad6ca2f5e92290fabc19153f6a5b6973ff51cf8abec4c735ad4add54"
+        },
+        {
+          "path": ".gitignore",
+          "sha256": "707b1f558a05f5cca8d5e45c55ae3c2ab5b98518f8390d59f15bb5c25ea9a736"
+        },
+        {
+          "path": ".pisa/architecture.plan.json",
+          "sha256": "bd724fb425ee5b38a2a3f869c7a1c795620e89569f3b107cd429d6a54ce358c9"
+        },
+        {
+          "path": "pom.xml",
+          "sha256": "a29becc2979192967e8de4832380ab9cd72f232e13983f178d84493365d35881"
+        },
+        {
+          "path": "project.spec.json",
+          "sha256": "e4f190192cd31299374a4d912b812466ae5905db11764e33c3abbb15c571a840"
+        },
+        {
+          "path": "render.yml",
+          "sha256": "4ccf32baa51dadf7e371c40b1f4e0ecaf38fe5933b57f438b217d440a322b162"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/AdressenSpringApplication.java",
+          "sha256": "2d0b6c42b095fa7af2ae73c6c4337fe03ad50b3af3ea4317de0b1285e6a72974"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/H2TcpServerConfig.java",
+          "sha256": "24b3f1d37d79bae0cd82ab32c069d15da26e5ceebe9134a0d59c39cd4f757a0c"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityConfig.java",
+          "sha256": "601453927a989f40da22ef0b9c59fe1c66bb6ab93b063f6035176045cba691c1"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityStore.java",
+          "sha256": "b348a739a60092918c898f2b16b5e66a0d1f0b5d7581871336ba88223907dafb"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/GlobalExceptionHandler.java",
+          "sha256": "122a8dd04d78e08e177f804632cbcc2206de5b7c633def3667ed1ae9a771d546"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/SecurityController.java",
+          "sha256": "d29b37794b9deee910313c884cc55947802b5eef6dd0941a8d1ae25568041dea"
+        },
+        {
+          "path": "src/main/resources/application.yml",
+          "sha256": "7277c38e58433198d33a6d089a2a10da60d7b6d3f43efed8de5e9f1462053a61"
+        },
+        {
+          "path": "src/main/resources/static/change-password.html",
+          "sha256": "3d1d8b277ea1e58fcd3adc9e8ded40ffe74d09d0bbf9652b2f80beb8065e9283"
+        },
+        {
+          "path": "src/main/resources/static/login.html",
+          "sha256": "3a4ee118d3d92bff1af962ee99b6d09e7417d4daa00decd81da1b5b45d8bd664"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/AdressenSpringApplicationTests.java",
+          "sha256": "ba53f81412555999dad75cbeaa487c21a18540545d40adce54f15c66150e3e90"
+        },
+        {
+          "path": "src/test/resources/application.properties",
+          "sha256": "6036aebd3f71ae616a37373ba989abdd62644db1e583e2b14276508660936bc9"
+        }
+      ]
     }
   ]
 }

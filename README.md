@@ -267,5 +267,15 @@ Reads: `spec/architecture.adl` (sha256 532a5d0987ca)
 
 Writes 16 file(s): `.github/workflows/ci.yml`, `.gitignore`, `.pisa/architecture.plan.json`, `pom.xml`, `project.spec.json`, `src/main/java/ch/example/adressen/AdressenSpringApplication.java`, `src/main/java/ch/example/adressen/config/H2TcpServerConfig.java`, `src/main/java/ch/example/adressen/config/SecurityConfig.java`, and 8 more (all with hashes in `.pisa/recipe.json`)
 
+### Step 4: init
+
+```bash
+pisa init --target spring-boot --out . --group ch.example --artifact adressen-spring --package ch.example.adressen --java 25 --adl spec/architecture.adl --force
+```
+
+Reads: `spec/architecture.adl` (sha256 a66b9be8f5ee)
+
+Writes 18 file(s): `.github/workflows/cd.yml`, `.github/workflows/release.yml`, `.gitignore`, `.pisa/architecture.plan.json`, `pom.xml`, `project.spec.json`, `render.yml`, `src/main/java/ch/example/adressen/AdressenSpringApplication.java`, and 10 more (all with hashes in `.pisa/recipe.json`)
+
 Last step run with pisa 0.13.0 (development run, no build timestamp).
 <!-- pisa:recipe:end -->

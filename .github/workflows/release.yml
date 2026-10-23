@@ -1,0 +1,27 @@
+# Makes a GitHub release when you push a tag like v1.0.0: it runs the tests, builds the jar and attaches it.
+# Written once by `pisa init` because the architecture description has `pipeline { release github }`; change it as you like,
+# `pisa init --force` leaves it alone.
+#   git tag v1.0.0 && git push origin v1.0.0
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+      - run: mvn -B package
+      - run: gh release create "$GITHUB_REF_NAME" --generate-notes target/*.jar
+        env:
+          GH_TOKEN: ${{ github.token }}

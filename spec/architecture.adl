@@ -16,5 +16,7 @@ architecture AdressenSpring {
     docker { }
     pipeline {
         ci github
+        release github
+        deploy render
     }
 }
