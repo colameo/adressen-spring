@@ -1,0 +1,7 @@
+{
+  "target": "spring-boot",
+  "groupId": "ch.example",
+  "artifactId": "adressen-spring",
+  "basePackage": "ch.example.adressen",
+  "javaVersion": "25"
+}

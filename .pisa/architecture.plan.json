@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "style": "layered",
+  "packages": {
+    "model": "model",
+    "repository": "repository",
+    "controller": "controller",
+    "validation": "validation",
+    "config": "config",
+    "service": "service",
+    "dto": "dto",
+    "mapper": "mapper",
+    "ui": "ui"
+  },
+  "versions": {
+    "springBoot": "4.1.1",
+    "alpinejs": "3.17.4",
+    "validator": "13.12.0",
+    "bootstrap": "5.3.8",
+    "playwright": "1.64.0",
+    "archunit": "1.5.1",
+    "spotless": "3.10.4",
+    "palantir": "2.102.0",
+    "commonsValidator": "1.11.0",
+    "postgres": "17",
+    "mapstruct": "1.6.3",
+    "lombokMapstructBinding": "0.2.0"
+  },
+  "database": {
+    "engine": "h2",
+    "user": "sa",
+    "password": "",
+    "console": true,
+    "tcp": {
+      "enabled": true,
+      "port": 9092
+    },
+    "port": 5432
+  },
+  "authentication": "session",
+  "roles": {
+    "ADMIN": {
+      "*": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "USER": {
+      "*": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Company": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "docker": {},
+  "pipeline": {
+    "ci": "github"
+  }
+}

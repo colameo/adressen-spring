@@ -1,0 +1,20 @@
+architecture AdressenSpring {
+    container db : database { engine h2 }
+    container api : backend {
+        package ch.example.adressen
+        authentication session
+        roles {
+            ADMIN
+            USER {
+                Company: read, update
+            }
+        }
+        uses db
+        components layered
+    }
+    container web : frontend { technology alpine  servedBy api }
+    docker { }
+    pipeline {
+        ci github
+    }
+}

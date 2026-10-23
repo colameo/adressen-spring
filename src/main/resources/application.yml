@@ -1,0 +1,32 @@
+# The name of the application, shown as the heading of the home page (GET /api/app). Change it here and restart.
+app:
+  title: "AdressenSpring"
+spring:
+  application:
+    name: adressen-spring
+  datasource:
+    # H2 in memory. While the application runs you can look into it: the console at
+    # http://localhost:8080/h2-console and, from a database tool such as IntelliJ, the TCP server below
+    # (jdbc:h2:tcp://localhost:9092/mem:adressen-spring). Both use this user; H2's defaults are sa and no password.
+    url: jdbc:h2:mem:adressen-spring
+    username: sa
+    password: ""
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          # Pins Hibernate's TIMESTAMP (DateTime) handling to UTC explicitly, independent of the JVM default -
+          # defense in depth alongside the JVM-wide fix in the Application class, which is what actually fixes
+          # the pre-1894 DATE/LocalDate round-trip bug (this property alone does not, DATE columns aren't
+          # affected by it - verified).
+          time_zone: UTC
+
+# The TCP server of H2 (config/H2TcpServerConfig) for database tools. Development only: set enabled to
+# false (or remove the class) before the application goes anywhere that others can reach.
+h2:
+  tcp:
+    enabled: true
+    port: 9092

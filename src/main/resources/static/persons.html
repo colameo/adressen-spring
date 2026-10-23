@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Persons</title>
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+  <script>window.PISA_PAGE = {"api":"api/persons","id":"id","idGenerated":true,"idNumber":true,"fields":[{"name":"firstName","kind":"value","rules":{"required":true,"minlength":1,"maxlength":80}},{"name":"lastName","kind":"value","rules":{"required":true,"minlength":1,"maxlength":80}},{"name":"email","kind":"value","rules":{"format":"email"}},{"name":"phone","kind":"value","rules":{"pattern":"\\+?[0-9 ()/.-]{6,20}"}},{"name":"birthday","kind":"value"},{"name":"status","kind":"value","rules":{"required":true}},{"name":"address.street","kind":"value","rules":{"required":true}},{"name":"address.zip","kind":"value","rules":{"required":true,"pattern":"[0-9]{4}"}},{"name":"address.city","kind":"value","rules":{"required":true}},{"name":"company","kind":"ref","idName":"id","idNumber":true}],"refs":[{"key":"company","api":"api/companies"}],"tables":[],"pageSize":10,"texts":{"newHeading":"New Person","editHeading":"Edit Person","viewHeading":"View Person","create":"Create","save":"Save","cancel":"Cancel"},"parts":[{"path":"address","idName":"id"}],"entity":"Person"};</script>
+  <script src="webjars/validator/13.12.0/validator.min.js"></script>
+  <script src="app.js"></script>
+  <script defer src="webjars/alpinejs/3.17.4/dist/cdn.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand bg-dark border-bottom" data-bs-theme="dark">
+    <div class="container d-flex flex-wrap align-items-center gap-2">
+      <a class="navbar-brand" href="index.html">Home</a>
+      <div class="navbar-nav flex-row flex-wrap">
+        <a class="nav-link px-2 active" href="persons.html" aria-current="page">Persons</a>
+        <a class="nav-link px-2" href="companies.html">Companies</a>
+      </div>
+      <div class="user-menu ms-auto" x-data="userMenu" x-show="me" @keydown.escape.window="open = false" @click.outside="open = false">
+        <button type="button" class="menu-button btn btn-outline-light btn-sm" aria-label="Menu" aria-haspopup="true" :aria-expanded="open" @click="open = !open">&#9776;</button>
+        <div class="menu dropdown-menu dropdown-menu-end" :class="{ show: open }">
+          <span class="menu-user dropdown-item-text">Signed in as <strong id="who-name" x-text="me && me.name"></strong></span>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item" href="change-password.html">Change password</a>
+          <a class="dropdown-item" href="#" @click.prevent="logout()">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-4" x-data="crud(window.PISA_PAGE)">
+    <h1 class="h3 mb-4">Persons</h1>
+    <p class="error alert alert-danger" x-show="error" x-text="error"></p>
+
+    <form class="card card-body shadow-sm mb-4" novalidate x-show="viewing || (can('create') && editing === null) || (can('update') && editing !== null)" @submit.prevent="save()">
+      <h2 class="h5 mb-0" x-text="viewing ? window.PISA_PAGE.texts.viewHeading + ' ' + editing : editing === null ? window.PISA_PAGE.texts.newHeading : window.PISA_PAGE.texts.editHeading + ' ' + editing"></h2>
+      <fieldset class="border rounded p-3">
+        <label>First Name
+          <input class="form-control" type="text" minlength="1" maxlength="80" name="firstName" x-model="form.firstName" :disabled="viewing" required @input="errors['firstName'] = ''" :class="{ invalid: errors['firstName'], 'is-invalid': errors['firstName'] }">
+          <span class="field-error text-danger small" x-show="errors['firstName']" x-text="errors['firstName']"></span>
+        </label>
+        <label>Last Name
+          <input class="form-control" type="text" minlength="1" maxlength="80" name="lastName" x-model="form.lastName" :disabled="viewing" required @input="errors['lastName'] = ''" :class="{ invalid: errors['lastName'], 'is-invalid': errors['lastName'] }">
+          <span class="field-error text-danger small" x-show="errors['lastName']" x-text="errors['lastName']"></span>
+        </label>
+        <label>Email
+          <input class="form-control" type="email" name="email" x-model="form.email" :disabled="viewing" @input="errors['email'] = ''" :class="{ invalid: errors['email'], 'is-invalid': errors['email'] }">
+          <span class="field-error text-danger small" x-show="errors['email']" x-text="errors['email']"></span>
+        </label>
+        <label>Phone
+          <input class="form-control" type="tel" pattern="&#92;+?[0-9 ()/.-]{6,20}" name="phone" x-model="form.phone" :disabled="viewing" @input="errors['phone'] = ''" :class="{ invalid: errors['phone'], 'is-invalid': errors['phone'] }">
+          <span class="field-error text-danger small" x-show="errors['phone']" x-text="errors['phone']"></span>
+        </label>
+        <label>Birthday
+          <input class="form-control" type="date" name="birthday" x-model="form.birthday" :disabled="viewing" @input="errors['birthday'] = ''" :class="{ invalid: errors['birthday'], 'is-invalid': errors['birthday'] }">
+          <span class="field-error text-danger small" x-show="errors['birthday']" x-text="errors['birthday']"></span>
+        </label>
+        <label>Status
+          <select class="form-select" name="status" x-model="form.status" :disabled="viewing" required @change="errors['status'] = ''" :class="{ invalid: errors['status'], 'is-invalid': errors['status'] }">
+            <option value="">-</option>
+            <option value="ACTIVE">Aktiv</option>
+            <option value="BLOCKED">Gesperrt</option>
+            <option value="ARCHIVED">Archiviert</option>
+          </select>
+          <span class="field-error text-danger small" x-show="errors['status']" x-text="errors['status']"></span>
+        </label>
+        <label>Street
+          <input class="form-control" type="text" name="address.street" x-model="form.address.street" :disabled="viewing" required @input="errors['address.street'] = ''" :class="{ invalid: errors['address.street'], 'is-invalid': errors['address.street'] }">
+          <span class="field-error text-danger small" x-show="errors['address.street']" x-text="errors['address.street']"></span>
+        </label>
+        <label>Zip
+          <input class="form-control" type="text" pattern="[0-9]{4}" name="address.zip" x-model="form.address.zip" :disabled="viewing" required @input="errors['address.zip'] = ''" :class="{ invalid: errors['address.zip'], 'is-invalid': errors['address.zip'] }">
+          <span class="field-error text-danger small" x-show="errors['address.zip']" x-text="errors['address.zip']"></span>
+        </label>
+        <label>City
+          <input class="form-control" type="text" name="address.city" x-model="form.address.city" :disabled="viewing" required @input="errors['address.city'] = ''" :class="{ invalid: errors['address.city'], 'is-invalid': errors['address.city'] }">
+          <span class="field-error text-danger small" x-show="errors['address.city']" x-text="errors['address.city']"></span>
+        </label>
+        <label>Company
+          <select class="form-select" name="company" x-model="form.company" :disabled="viewing">
+            <option value="">-</option>
+            <template x-for="option in refs['company']" :key="option.id">
+              <option :value="option.id" :selected="String(option.id) === form.company" x-text="label(option, 'name', 'id')"></option>
+            </template>
+          </select>
+        </label>
+      </fieldset>
+      <div class="buttons d-flex gap-2">
+        <button type="submit" class="btn btn-primary" x-show="!viewing" x-text="editing === null ? window.PISA_PAGE.texts.create : window.PISA_PAGE.texts.save"></button>
+        <button type="button" class="btn btn-primary" x-show="viewing && can('update')" @click="startEdit()">Edit</button>
+        <button type="button" class="btn btn-outline-secondary" x-show="viewing" @click="reset()">Close</button>
+        <button type="button" class="btn btn-outline-secondary" x-show="editing !== null && !viewing" @click="reset()">Cancel</button>
+      </div>
+    </form>
+
+    <p class="empty text-muted mb-0" x-show="items.length === 0">No entries yet.</p>
+    <table class="table table-hover align-middle bg-body shadow-sm rounded" x-show="items.length > 0">
+      <thead class="table-light">
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Birthday</th>
+          <th>Status</th>
+          <th>Company</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="item in items" :key="item.id">
+          <tr class="clickable" @click="view(item)">
+            <td x-text="show(item.id)"></td>
+            <td x-text="show(item.firstName)"></td>
+            <td x-text="show(item.lastName)"></td>
+            <td x-text="show(item.email)"></td>
+            <td x-text="show(item.phone)"></td>
+            <td x-text="show(item.birthday)"></td>
+            <td x-text="show(({&quot;ACTIVE&quot;:&quot;Aktiv&quot;,&quot;BLOCKED&quot;:&quot;Gesperrt&quot;,&quot;ARCHIVED&quot;:&quot;Archiviert&quot;})[item.status] ?? item.status)"></td>
+            <td x-text="label(item.company, 'name', 'id')"></td>
+            <td class="actions">
+              <button type="button" class="btn btn-sm btn-outline-primary" x-show="can('update')" @click.stop="edit(item)">Edit</button>
+              <button type="button" class="btn btn-sm btn-outline-danger" x-show="can('delete')" @click.stop="remove(item)">Delete</button>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <div class="pager small text-muted" x-show="list.pages > 1">
+      <button type="button" class="btn btn-sm btn-outline-secondary" @click="goTo(list.page - 1)" :disabled="list.page === 0">Previous</button>
+      <span x-text="'Page ' + (list.page + 1) + ' of ' + list.pages + ' (' + list.total + ' entries)'"></span>
+      <button type="button" class="btn btn-sm btn-outline-secondary" @click="goTo(list.page + 1)" :disabled="list.page >= list.pages - 1">Next</button>
+    </div>
+  </main>
+</body>
+</html>

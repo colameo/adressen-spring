@@ -1,0 +1,28 @@
+enum PersonStatus { ACTIVE ("Aktiv"), BLOCKED ("Gesperrt"), ARCHIVED ("Archiviert") }
+
+type Plz = String ~ "[0-9]{4}"
+
+entity Person {
+    @id id: Long
+    firstName: String(1..80)
+    lastName: String(1..80)
+    email: Email? unique
+    phone: Phone?
+    birthday: Date?
+    status: PersonStatus
+    oneToOne address: Address composed
+    manyToOne company: Company
+}
+
+entity Address {
+    @id id: Long
+    street: String
+    zip: Plz
+    city: String
+}
+
+entity Company {
+    @id id: Long
+    name: String unique
+    oneToMany employees: Person mappedBy company
+}

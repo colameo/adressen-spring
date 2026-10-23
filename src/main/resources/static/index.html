@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand bg-dark border-bottom" data-bs-theme="dark">
+    <div class="container d-flex flex-wrap align-items-center gap-2">
+      <a class="navbar-brand" href="index.html">Home</a>
+      <div class="navbar-nav flex-row flex-wrap">
+        <a class="nav-link px-2" href="persons.html">Persons</a>
+        <a class="nav-link px-2" href="companies.html">Companies</a>
+      </div>
+      <div class="user-menu ms-auto" id="user-menu" hidden>
+        <button type="button" class="menu-button btn btn-outline-light btn-sm" id="menu-button" aria-label="Menu" aria-haspopup="true" aria-expanded="false">&#9776;</button>
+        <div class="menu dropdown-menu dropdown-menu-end" id="menu">
+          <span class="menu-user dropdown-item-text">Signed in as <strong id="who-name"></strong></span>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item" href="change-password.html">Change password</a>
+          <a class="dropdown-item" href="#" id="logout">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-4">
+    <h1 class="display-6 mb-4" id="app-title"></h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+      <div class="col"><a class="card card-body h-100 shadow-sm text-decoration-none fw-semibold" href="persons.html">Persons</a></div>
+      <div class="col"><a class="card card-body h-100 shadow-sm text-decoration-none fw-semibold" href="companies.html">Companies</a></div>
+    </div>
+  </main>
+  <script>
+    // The name of the application (app.title in application.yml): heading and title of this page.
+    fetch("api/app").then((r) => (r.ok ? r.json() : null)).then((app) => {
+      if (!app) return;
+      document.getElementById("app-title").textContent = app.title;
+      document.title = app.title;
+    });
+  </script>
+  <script>
+    const xsrf = () => decodeURIComponent((document.cookie.split("; ").find((c) => c.startsWith("XSRF-TOKEN=")) || "=").split("=")[1]);
+    fetch("api/me").then((r) => r.json()).then((me) => {
+      document.getElementById("who-name").textContent = me.name;
+      document.getElementById("user-menu").hidden = false;
+    });
+    const menu = document.getElementById("menu");
+    const button = document.getElementById("menu-button");
+    const setMenu = (open) => {
+      menu.classList.toggle("show", open);
+      button.setAttribute("aria-expanded", String(open));
+    };
+    button.addEventListener("click", () => setMenu(!menu.classList.contains("show")));
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest("#user-menu")) setMenu(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenu(false);
+    });
+    document.getElementById("logout").addEventListener("click", async (event) => {
+      event.preventDefault();
+      await fetch("logout", { method: "POST", headers: { "X-XSRF-TOKEN": xsrf() } });
+      location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

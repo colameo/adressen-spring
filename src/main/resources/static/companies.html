@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Companies</title>
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+  <script>window.PISA_PAGE = {"api":"api/companies","id":"id","idGenerated":true,"idNumber":true,"fields":[{"name":"name","kind":"value","rules":{"required":true}}],"refs":[],"tables":["employees"],"pageSize":10,"texts":{"newHeading":"New Company","editHeading":"Edit Company","viewHeading":"View Company","create":"Create","save":"Save","cancel":"Cancel"},"parts":[],"entity":"Company"};</script>
+  <script src="webjars/validator/13.12.0/validator.min.js"></script>
+  <script src="app.js"></script>
+  <script defer src="webjars/alpinejs/3.17.4/dist/cdn.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand bg-dark border-bottom" data-bs-theme="dark">
+    <div class="container d-flex flex-wrap align-items-center gap-2">
+      <a class="navbar-brand" href="index.html">Home</a>
+      <div class="navbar-nav flex-row flex-wrap">
+        <a class="nav-link px-2" href="persons.html">Persons</a>
+        <a class="nav-link px-2 active" href="companies.html" aria-current="page">Companies</a>
+      </div>
+      <div class="user-menu ms-auto" x-data="userMenu" x-show="me" @keydown.escape.window="open = false" @click.outside="open = false">
+        <button type="button" class="menu-button btn btn-outline-light btn-sm" aria-label="Menu" aria-haspopup="true" :aria-expanded="open" @click="open = !open">&#9776;</button>
+        <div class="menu dropdown-menu dropdown-menu-end" :class="{ show: open }">
+          <span class="menu-user dropdown-item-text">Signed in as <strong id="who-name" x-text="me && me.name"></strong></span>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item" href="change-password.html">Change password</a>
+          <a class="dropdown-item" href="#" @click.prevent="logout()">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-4" x-data="crud(window.PISA_PAGE)">
+    <h1 class="h3 mb-4">Companies</h1>
+    <p class="error alert alert-danger" x-show="error" x-text="error"></p>
+
+    <form class="card card-body shadow-sm mb-4" novalidate x-show="viewing || (can('create') && editing === null) || (can('update') && editing !== null)" @submit.prevent="save()">
+      <h2 class="h5 mb-0" x-text="viewing ? window.PISA_PAGE.texts.viewHeading + ' ' + editing : editing === null ? window.PISA_PAGE.texts.newHeading : window.PISA_PAGE.texts.editHeading + ' ' + editing"></h2>
+      <fieldset class="border rounded p-3">
+        <label>Name
+          <input class="form-control" type="text" name="name" x-model="form.name" :disabled="viewing" required @input="errors['name'] = ''" :class="{ invalid: errors['name'], 'is-invalid': errors['name'] }">
+          <span class="field-error text-danger small" x-show="errors['name']" x-text="errors['name']"></span>
+        </label>
+        <div class="subtable">
+          <span class="caption fw-semibold">Employees</span>
+          <p class="empty text-muted mb-0" x-show="editing === null">Shown after saving.</p>
+          <p class="empty text-muted mb-0" x-show="editing !== null && tables['employees'].total === 0">None yet.</p>
+          <table class="table table-sm table-bordered mb-0" x-show="editing !== null && tables['employees'].total > 0">
+            <thead class="table-light">
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="row in tables['employees'].items" :key="row.id">
+                <tr>
+                  <td x-text="show(row.firstName)"></td>
+                  <td x-text="show(row.lastName)"></td>
+                  <td x-text="show(row.email)"></td>
+                  <td class="actions"><a class="btn btn-sm btn-outline-primary" :href="'persons.html#edit=' + encodeURIComponent(row.id)">Open</a></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+          <div class="pager small text-muted" x-show="editing !== null && tables['employees'].pages > 1">
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="loadTable('employees', tables['employees'].page - 1)" :disabled="tables['employees'].page === 0">Previous</button>
+            <span x-text="'Page ' + (tables['employees'].page + 1) + ' of ' + tables['employees'].pages"></span>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="loadTable('employees', tables['employees'].page + 1)" :disabled="tables['employees'].page >= tables['employees'].pages - 1">Next</button>
+          </div>
+        </div>
+      </fieldset>
+      <div class="buttons d-flex gap-2">
+        <button type="submit" class="btn btn-primary" x-show="!viewing" x-text="editing === null ? window.PISA_PAGE.texts.create : window.PISA_PAGE.texts.save"></button>
+        <button type="button" class="btn btn-primary" x-show="viewing && can('update')" @click="startEdit()">Edit</button>
+        <button type="button" class="btn btn-outline-secondary" x-show="viewing" @click="reset()">Close</button>
+        <button type="button" class="btn btn-outline-secondary" x-show="editing !== null && !viewing" @click="reset()">Cancel</button>
+      </div>
+    </form>
+
+    <p class="empty text-muted mb-0" x-show="items.length === 0">No entries yet.</p>
+    <table class="table table-hover align-middle bg-body shadow-sm rounded" x-show="items.length > 0">
+      <thead class="table-light">
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="item in items" :key="item.id">
+          <tr class="clickable" @click="view(item)">
+            <td x-text="show(item.id)"></td>
+            <td x-text="show(item.name)"></td>
+            <td class="actions">
+              <button type="button" class="btn btn-sm btn-outline-primary" x-show="can('update')" @click.stop="edit(item)">Edit</button>
+              <button type="button" class="btn btn-sm btn-outline-danger" x-show="can('delete')" @click.stop="remove(item)">Delete</button>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <div class="pager small text-muted" x-show="list.pages > 1">
+      <button type="button" class="btn btn-sm btn-outline-secondary" @click="goTo(list.page - 1)" :disabled="list.page === 0">Previous</button>
+      <span x-text="'Page ' + (list.page + 1) + ' of ' + list.pages + ' (' + list.total + ' entries)'"></span>
+      <button type="button" class="btn btn-sm btn-outline-secondary" @click="goTo(list.page + 1)" :disabled="list.page >= list.pages - 1">Next</button>
+    </div>
+  </main>
+</body>
+</html>

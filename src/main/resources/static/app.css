@@ -1,0 +1,250 @@
+/* Bootstrap 5 (bootstrap.min.css, loaded first) does the layout; this file holds the colours (in the style of the Arsha template of BootstrapMade) and what the generated pages add to it. */
+:root {
+  --pisa-header: #3d4d6a;
+  --pisa-accent: #47b2e4;
+  --pisa-accent-dark: #2f94c4;
+  --pisa-heading: #37517e;
+  --pisa-surface: #f3f5fa;
+  --bs-primary: #47b2e4;
+  --bs-primary-rgb: 71, 178, 228;
+  --bs-body-color: #444444;
+  --bs-body-color-rgb: 68, 68, 68;
+  --bs-body-font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bs-link-color: #37517e;
+  --bs-link-color-rgb: 55, 81, 126;
+  --bs-link-hover-color: #47b2e4;
+  --bs-link-hover-color-rgb: 71, 178, 228;
+  --bs-border-color: #dde5f0;
+  --bs-tertiary-bg: #f3f5fa;
+  --bs-tertiary-bg-rgb: 243, 245, 250;
+}
+
+body {
+  background: var(--pisa-surface);
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3,
+.h5,
+.display-6,
+legend {
+  color: var(--pisa-heading);
+  font-weight: 700;
+}
+
+legend {
+  font-weight: 600;
+}
+
+/* The navigation: the dark header of the template, light links, the accent colour for the page you are on. */
+nav.navbar {
+  --bs-dark-rgb: 61, 77, 106;
+  --bs-navbar-color: #ffffff;
+  --bs-navbar-hover-color: #47b2e4;
+  --bs-navbar-active-color: #47b2e4;
+  padding-block: 0.75rem;
+  border-bottom: 0 !important;
+  box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.12);
+}
+
+nav.navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+nav.navbar .nav-link {
+  font-size: 0.95rem;
+}
+
+/* Buttons are pills; the main one has the accent colour. */
+.btn {
+  border-radius: 50rem;
+}
+
+.btn-primary {
+  --bs-btn-bg: #47b2e4;
+  --bs-btn-border-color: #47b2e4;
+  --bs-btn-hover-bg: #2f94c4;
+  --bs-btn-hover-border-color: #2f94c4;
+  --bs-btn-active-bg: #2688b6;
+  --bs-btn-active-border-color: #2688b6;
+  --bs-btn-disabled-bg: #47b2e4;
+  --bs-btn-disabled-border-color: #47b2e4;
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-color: #ffffff;
+  padding-inline: 1.5rem;
+  font-weight: 500;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #37517e;
+  --bs-btn-border-color: #37517e;
+  --bs-btn-hover-bg: #37517e;
+  --bs-btn-hover-border-color: #37517e;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-bg: #2c4268;
+  --bs-btn-active-border-color: #2c4268;
+  --bs-btn-active-color: #ffffff;
+}
+
+.menu-button {
+  border-radius: 0.375rem;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: #47b2e4;
+  box-shadow: 0 0 0 0.2rem rgba(71, 178, 228, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: #47b2e4;
+  border-color: #47b2e4;
+}
+
+/* Cards and the table: no border, a wide soft shadow. */
+.card,
+main > table {
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 1.8rem rgba(0, 0, 0, 0.08);
+}
+
+main > table {
+  overflow: hidden;
+}
+
+.table-light {
+  --bs-table-bg: #eaf1f9;
+  --bs-table-color: #37517e;
+  --bs-table-border-color: #dde5f0;
+}
+
+/* The cards of the home page: an accent line on top, they lift when the pointer is on them. */
+a.card {
+  border-top: 3px solid var(--pisa-accent);
+  color: var(--pisa-heading);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+a.card:hover {
+  transform: translateY(-6px);
+  color: var(--pisa-accent);
+}
+
+/* The sign-in and the password page: the colours of the header on the whole page, the card on top. */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3d4d6a 0%, #47b2e4 100%);
+}
+
+.login-page h1 {
+  color: #ffffff;
+}
+
+/* Bootstrap's d-flex and d-grid are !important and would beat the x-show of Alpine: the form and the pager get their display here. */
+form.card {
+  display: grid;
+  gap: 1rem;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* The fields of a group: as many columns as fit. A label sits above its input, the message of a wrong value under it. */
+fieldset {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+label {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+label.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+}
+
+label.check input {
+  margin-top: 0;
+}
+
+/* Several fields on one line (a row of the layout spec), spanning the whole group. */
+.field-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.field-row > label {
+  flex: 1 1 10rem;
+}
+
+/* A read-only table of an inverse collection in the form, spanning the whole group. */
+.subtable {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* A field the page or the server found wrong: the message under it (the input has Bootstrap's is-invalid). */
+.field-error:empty {
+  display: none;
+}
+
+select[multiple] {
+  min-height: 6rem;
+}
+
+td.actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+td.actions button + button {
+  margin-left: 0.25rem;
+}
+
+/* A click on a row shows the entry (read-only). */
+tr.clickable {
+  cursor: pointer;
+}
+/* The user menu at the right end of the navigation: a hamburger button, below it the dropdown (Bootstrap's dropdown-menu, shown with .show). */
+nav .user-menu {
+  position: relative;
+}
+
+nav .user-menu .dropdown-menu {
+  display: none;
+  right: 0;
+  left: auto;
+  top: calc(100% + 0.5rem);
+  min-width: 12rem;
+  white-space: nowrap;
+}
+
+nav .user-menu .dropdown-menu.show {
+  display: block;
+}

@@ -1,0 +1,37 @@
+@startuml
+set separator none
+hide circle
+hide empty methods
+skinparam classAttributeIconSize 0
+
+package "adressen-spring.dml" {
+  enum PersonStatus {
+      ACTIVE
+      BLOCKED
+      ARCHIVED
+  }
+  class Person {
+      id : Long <<id>>
+      firstName : String(1..80)
+      lastName : String(1..80)
+      email : Email [0..1] <<unique>>
+      phone : Phone [0..1]
+      birthday : Date [0..1]
+      status : PersonStatus
+  }
+  class Address {
+      id : Long <<id>>
+      street : String
+      zip : Plz
+      city : String
+  }
+  class Company {
+      id : Long <<id>>
+      name : String <<unique>>
+  }
+}
+
+Person ..> PersonStatus : status
+Person "1" *-- "1" Address : address
+Person "*" -- "1" Company : company / employees
+@enduml

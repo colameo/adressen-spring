@@ -1,0 +1,20 @@
+# The users of the generated tests (never of the application): written by `pisa generate`, rewritten on every run.
+# tester may do everything the entities allow, nobody may do nothing, newcomer and newbie have to choose a password at
+# their first login (one per test class: the choice is kept for the life of the application's database). All have the password tester (bcrypt hash, given as `password`).
+# Besides them, one user per role of the architecture (`as-<role>`, the roles of the plan) for the tests of what each role may do.
+roles:
+  FULL:
+    "*": [create, read, update, delete]
+  NOTHING: {}
+  ADMIN:
+    "*": [create, read, update, delete]
+  USER:
+    "*": [create, read, update, delete]
+    "Company": [read, update]
+users:
+  - { name: tester, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [FULL], mustChangePassword: false }
+  - { name: nobody, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [NOTHING], mustChangePassword: false }
+  - { name: newcomer, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [FULL], mustChangePassword: true }
+  - { name: newbie, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [FULL], mustChangePassword: true }
+  - { name: as-admin, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [ADMIN], mustChangePassword: false }
+  - { name: as-user, password: "$2b$10$T6wIb6aHs18KMJpujwzOluftrC/f09nsvzn3Km2xPe3Py..eY4koG", roles: [USER], mustChangePassword: false }

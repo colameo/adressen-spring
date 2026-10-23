@@ -1,0 +1,19 @@
+# The roles and users of this application. Read when it starts: change this file and restart, no `pisa generate` needed.
+#
+# users: development users, one per role. A user starts with the password of their name (admin/admin, user/user): public
+# knowledge, so the first login asks for a new password (twice) and keeps its hash in the table usr_password of the database
+# (`mustChangePassword`, true unless you write false). Nothing secret is in this file. A user who should start with another
+# password gets `password:` with a bcrypt hash (make one with: pisa hash-password); plain text is refused.
+#
+# roles: what a role may do, per entity ("*" = every entity without a rule of its own; a list for one entity replaces "*" for it,
+# for example Company: [read]). `roles { … }` in the .adl is where `pisa init` took them from. `@operations` of an entity in
+# the .dml stays the upper limit.
+roles:
+  ADMIN:
+    "*": [create, read, update, delete]
+  USER:
+    "*": [create, read, update, delete]
+    "Company": [read, update]
+users:
+  - { name: admin, roles: [ADMIN] }
+  - { name: user, roles: [USER] }

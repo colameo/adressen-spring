@@ -1,0 +1,7 @@
+# What stays out of the image (docker build copies the folder, minus this).
+.git
+.idea
+.pisa
+doc
+target
+*.db

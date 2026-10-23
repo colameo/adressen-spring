@@ -1,0 +1,451 @@
+{
+  "schema": 1,
+  "steps": [
+    {
+      "n": 1,
+      "command": "init",
+      "argv": [
+        "init",
+        "--target",
+        "spring-boot",
+        "--out",
+        ".",
+        "--group",
+        "ch.example",
+        "--artifact",
+        "adressen-spring",
+        "--package",
+        "ch.example.adressen",
+        "--java",
+        "25",
+        "--adl",
+        "spec/architecture.adl"
+      ],
+      "pisa": "pisa 0.13.0 (development run, no build timestamp)",
+      "inputs": [
+        {
+          "path": "spec/architecture.adl",
+          "sha256": "2af6ec9ab1838d9765a392718dec8d63039280cbd852a3bc7ae932b9a47d5d5e"
+        }
+      ],
+      "templates": [],
+      "outputs": [
+        {
+          "path": ".dockerignore",
+          "sha256": "f76487fc357f6eefb8c1c9f2c33f1bdc92e4c75fa1d9590b4f9355d2c878e27e"
+        },
+        {
+          "path": ".gitignore",
+          "sha256": "707b1f558a05f5cca8d5e45c55ae3c2ab5b98518f8390d59f15bb5c25ea9a736"
+        },
+        {
+          "path": ".pisa/architecture.plan.json",
+          "sha256": "172e712172247f25336b0db10abb77d3ceb0657ed6a917ead7f05b5bd9535cc5"
+        },
+        {
+          "path": "Dockerfile",
+          "sha256": "01e80c022fafc808e0fe4ff7bcdefe0d4c45bc53d56a39f10f249ce46f593b4c"
+        },
+        {
+          "path": "pom.xml",
+          "sha256": "a29becc2979192967e8de4832380ab9cd72f232e13983f178d84493365d35881"
+        },
+        {
+          "path": "project.spec.json",
+          "sha256": "e4f190192cd31299374a4d912b812466ae5905db11764e33c3abbb15c571a840"
+        },
+        {
+          "path": "spec/README.md",
+          "sha256": "ba7290dec6ff74c31d82419df9fe9202cdfcf686d264e5dda562543cab7fe3db"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/AdressenSpringApplication.java",
+          "sha256": "2d0b6c42b095fa7af2ae73c6c4337fe03ad50b3af3ea4317de0b1285e6a72974"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/H2TcpServerConfig.java",
+          "sha256": "24b3f1d37d79bae0cd82ab32c069d15da26e5ceebe9134a0d59c39cd4f757a0c"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityConfig.java",
+          "sha256": "601453927a989f40da22ef0b9c59fe1c66bb6ab93b063f6035176045cba691c1"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityStore.java",
+          "sha256": "b348a739a60092918c898f2b16b5e66a0d1f0b5d7581871336ba88223907dafb"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/GlobalExceptionHandler.java",
+          "sha256": "122a8dd04d78e08e177f804632cbcc2206de5b7c633def3667ed1ae9a771d546"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/SecurityController.java",
+          "sha256": "d29b37794b9deee910313c884cc55947802b5eef6dd0941a8d1ae25568041dea"
+        },
+        {
+          "path": "src/main/resources/application.yml",
+          "sha256": "7277c38e58433198d33a6d089a2a10da60d7b6d3f43efed8de5e9f1462053a61"
+        },
+        {
+          "path": "src/main/resources/security.yml",
+          "sha256": "8fb9f8d84c88d7cdaf34b99ae4ac0d5f23b5f8d50ae978cedc801ad509920b19"
+        },
+        {
+          "path": "src/main/resources/static/change-password.html",
+          "sha256": "3d1d8b277ea1e58fcd3adc9e8ded40ffe74d09d0bbf9652b2f80beb8065e9283"
+        },
+        {
+          "path": "src/main/resources/static/login.html",
+          "sha256": "3a4ee118d3d92bff1af962ee99b6d09e7417d4daa00decd81da1b5b45d8bd664"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/AdressenSpringApplicationTests.java",
+          "sha256": "ba53f81412555999dad75cbeaa487c21a18540545d40adce54f15c66150e3e90"
+        },
+        {
+          "path": "src/test/resources/application.properties",
+          "sha256": "6036aebd3f71ae616a37373ba989abdd62644db1e583e2b14276508660936bc9"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "command": "generate",
+      "argv": [
+        "generate",
+        "--target",
+        "spring-boot",
+        "--file",
+        "spec/adressen-spring.dml",
+        "--out",
+        "."
+      ],
+      "pisa": "pisa 0.13.0 (development run, no build timestamp)",
+      "inputs": [
+        {
+          "path": ".pisa/architecture.plan.json",
+          "sha256": "172e712172247f25336b0db10abb77d3ceb0657ed6a917ead7f05b5bd9535cc5"
+        },
+        {
+          "path": "spec/adressen-spring.dml",
+          "sha256": "39b184800a069f84fe73589e21747f77363aeaa7479930cef0f08d875e266108"
+        },
+        {
+          "path": "spec/architecture.adl",
+          "sha256": "2af6ec9ab1838d9765a392718dec8d63039280cbd852a3bc7ae932b9a47d5d5e"
+        },
+        {
+          "path": "spec/company.ui.md",
+          "sha256": "b9017b2221baacfab2555f196a7712734da1798347b10c1a3e3141649c72fce7"
+        },
+        {
+          "path": "spec/person.ui.md",
+          "sha256": "797db759cb7e04d8fd48af7abf67d4b882a03850087416238235a510d4ba133d"
+        },
+        {
+          "path": "spec/use-cases.uc.md",
+          "sha256": "1f6f172721f390cf0bf550d446f7e6c65c6ff16f4edfb133f388d0b9c5efd28a"
+        }
+      ],
+      "templates": [],
+      "outputs": [
+        {
+          "path": "spec/domain-model.md",
+          "sha256": "cbf65c8b4f0cdff4f0524f0399a1cc756e4dfc24eecf376e6f4543f4399b8ec4"
+        },
+        {
+          "path": "spec/domain-model.puml",
+          "sha256": "e68e774f0bf8518edc12c43a6c554e51b9c73ba203da2d5eb83baf98a78c9abd"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/EntityAccess.java",
+          "sha256": "bd9c046869b32cc6ad4ea3356df25d4f5427f3a88f8be64655e4c0f7a466c77e"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/AppController.java",
+          "sha256": "28914e77956972871263eefbae65761ebfa67b113ee2bd18239c50afa58c2ac0"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/CompanyController.java",
+          "sha256": "81cf3458c1b2255579c20cf1d809102f36076775d7b4d405809584d6e28e74d5"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/PageResponse.java",
+          "sha256": "a0fd16edefa68dba60e657180a26ce659f22e35c013d08a7c61e4ceec4bdcdaa"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/PersonController.java",
+          "sha256": "04459c22221a1f3449e49e0b3f9c3df2cee0feb0c42453ade4fdea79112c590e"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/dto/AddressDto.java",
+          "sha256": "95185b7c5d6b448057cee3c0db6224d9cb8f62c4983312f8b18ec84880326f5c"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/dto/CompanyDto.java",
+          "sha256": "93afaae422e56915c07aa4f979727bd7812ce79b8dbb7fdce0eafe43beef108d"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/dto/PersonDto.java",
+          "sha256": "d2abce0a81ac826ce1bba22fe2d4091aa7aa42249d8da1154029531ad0a2bdce"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/mapper/AddressMapper.java",
+          "sha256": "0187f39a6e47457db282f8b2ce52ad0c6185b9569f984fe54b2ec70b0d326f37"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/mapper/CompanyMapper.java",
+          "sha256": "c58d039dd989f12ccd982508c9f3927d637929a47102ac8f1e61829b674ce9e8"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/mapper/PersonMapper.java",
+          "sha256": "726b11b2f00662ac773243b66cbab515a2686ae3d49909982d0ef120fef51377"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/model/Address.java",
+          "sha256": "61a8b0645234feaadd63f40eb980ed08b1982b4cbfd31c2379b330746e3cf659"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/model/Company.java",
+          "sha256": "6ed4b692b903faa38e3ebfc35efd502b01e39828e078b0357bb6999105152406"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/model/Person.java",
+          "sha256": "c08902e611e3acb63be25fdac5af326a30951ceafdb1de31d7683fa093824a46"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/model/PersonStatus.java",
+          "sha256": "97d8f9c918f3130afc1341e32a4472c1ee4899f56bad6344db4848db8cc3e5d0"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/repository/CompanyRepository.java",
+          "sha256": "e2f80559a3059a70ec47439a4be1b0f3049ac800a4c2fa6a21c56614bb70d058"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/repository/PersonRepository.java",
+          "sha256": "3a6fac7e805e23c401f6a5eddb173c101d42d954d3beded0b0af40c264e24efb"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/service/CompanyService.java",
+          "sha256": "fb79adee0055faba39f3077027490695dd219c55bb17c4a7ae514871820b8447"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/service/PersonService.java",
+          "sha256": "54918c65890314e3a06ef5c56833551af00332e407852482902aa127472c336a"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/validation/ValidEmail.java",
+          "sha256": "51168302137160b28714dbbcad60a5c3ffbcd8f180ffb1d75d12d5c41c11bf51"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/validation/ValidEmailValidator.java",
+          "sha256": "d6ea171aa031e3134d649b079788ce567d58984caffbaebc27d20c7a80f8e5b9"
+        },
+        {
+          "path": "src/main/resources/static/app.css",
+          "sha256": "231c15ba700b23e7a9e72ad6473d53bbe1ed652acd054f0febe22bed69e61e8e"
+        },
+        {
+          "path": "src/main/resources/static/app.js",
+          "sha256": "83d88b716fd6e407f4683dce9a0af850d0b8a1c225e4924f14edef11e39d868f"
+        },
+        {
+          "path": "src/main/resources/static/companies.html",
+          "sha256": "f2085da338721a4bb6cff329fdb8012411a1cdc68cafbda40a785dc792c8070d"
+        },
+        {
+          "path": "src/main/resources/static/index.html",
+          "sha256": "10917ae0f30e8578fe41f3d07b904a7194f48aad1cdbe0e0295a75cb668a167d"
+        },
+        {
+          "path": "src/main/resources/static/persons.html",
+          "sha256": "e93dca1c49ae897d063024205e4bdf4e3501fa8660b10e4bb1468c53c853f122"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ArchitectureTest.java",
+          "sha256": "bbfee7f5ad9775ff0da9382037846fddef320cc10488ae8fc97121eb8c172783"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/config/RolesTest.java",
+          "sha256": "4c214995f3dbd21a53f24daba9ee7e1fb601bd90ebe0729bf9edebec834f6ad5"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/config/SecurityTest.java",
+          "sha256": "8ab0855b328c3cb1f1a95a2b3ecbde3042b9fc51fb17cb6528b0cca0edc81a9b"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/controller/AppControllerTest.java",
+          "sha256": "0270f956b69b826e5f5e6510c3b822d093224037e6ce7e6995be4cb25a50032f"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/controller/CompanyControllerTest.java",
+          "sha256": "988ab34bf8532bf641c4fddcaa28121f9c5211f944f2c6784cda83933be54f26"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/controller/PersonControllerTest.java",
+          "sha256": "b18662797ba8d3516b92d55180bd0624e3015bb98ccc0248fb6fbcbd1d6b7e56"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/repository/CompanyRepositoryTest.java",
+          "sha256": "ab4ebb582c585671be2eefce33d852d0590ce33f40f88e9791832d0926985683"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/repository/PersonRepositoryTest.java",
+          "sha256": "537514c0029032b24438ca9d7edf1c3c19fba59716aa3ac85708bd535814a341"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/service/CompanyServiceTest.java",
+          "sha256": "b33170378231d1ff6147e9157d36a0de51da196dbd359b44f28a3e288189d0b6"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/service/PersonServiceTest.java",
+          "sha256": "e41ad5f9126b86963b3c223c5924fccac444cda1f4f9025d5eb52b5fa0272739"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/AbstractUiTest.java",
+          "sha256": "386298b73db05d2bc0849e35166f6d747ec4573d4030d14ef506f4a7e53d84ad"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/CompanyPageUiTest.java",
+          "sha256": "e05dde02d051a02cc74239b2f69aa4a989738f7770a6baa8711047186d6bb4fa"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/NavigationUiTest.java",
+          "sha256": "e978ae31d94db086826a5bdb5a78e997e5d68ef23ad620881fc912aac4761d00"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/PasswordChangeUiTest.java",
+          "sha256": "9c361a381cc5371c6f35ffc38596defb4a5d32483a6cc13d9231b1f12867ca12"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/PersonPageUiTest.java",
+          "sha256": "58e481cabe16d22b0874edf2bb807805626f063cfd074b52770a17130f295ce9"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC1UiTest.java",
+          "sha256": "5d671a69b7aff78edfad9126b291c9cdc0ab8c6476a10208c55cb611ce2fb487"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC2UiTest.java",
+          "sha256": "c06ab55366e64dfdde50128db7a170b1441c16b20ec8cb36048eb7a56ee8113a"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC3UiTest.java",
+          "sha256": "4ad06ecedcb6fb0831aab2bc5f508c4b604ce33d96061a582216fca7a351c3cb"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC4UiTest.java",
+          "sha256": "9b820402279205fa7f403f46530a160ab63d2eb4db3ba6ac2e7ae0d0cd1f00e6"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC5UiTest.java",
+          "sha256": "3ab5155101a5fb4412683933183a3d7ac2b0dd2c49d46c06a82b6a75f35cf4ea"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/ui/UC6UiTest.java",
+          "sha256": "a30915978682822110d44a3ff88cae2045fdb7f9d0482e86fcabc8c9046939e6"
+        },
+        {
+          "path": "src/test/resources/security-test.yml",
+          "sha256": "c3a284469ce458d0071dcffc35e1cb1ce2ec53dec6867aeeaa0ff61375dc2b7b"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "command": "init",
+      "argv": [
+        "init",
+        "--target",
+        "spring-boot",
+        "--out",
+        ".",
+        "--group",
+        "ch.example",
+        "--artifact",
+        "adressen-spring",
+        "--package",
+        "ch.example.adressen",
+        "--java",
+        "25",
+        "--adl",
+        "spec/architecture.adl",
+        "--force"
+      ],
+      "pisa": "pisa 0.13.0 (development run, no build timestamp)",
+      "inputs": [
+        {
+          "path": "spec/architecture.adl",
+          "sha256": "532a5d0987cab0db84221ef4affb07dd88910d7ff1cc14b2114c40f3ae04da93"
+        }
+      ],
+      "templates": [],
+      "outputs": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha256": "bcafe511447ae4bf0c5b960edcff9f2c76294ed3306e57dc0083ab1eebea7178"
+        },
+        {
+          "path": ".gitignore",
+          "sha256": "707b1f558a05f5cca8d5e45c55ae3c2ab5b98518f8390d59f15bb5c25ea9a736"
+        },
+        {
+          "path": ".pisa/architecture.plan.json",
+          "sha256": "0a928692bba25ea91e8508c5e1a6c83f03854907744678dbc771cad632877493"
+        },
+        {
+          "path": "pom.xml",
+          "sha256": "a29becc2979192967e8de4832380ab9cd72f232e13983f178d84493365d35881"
+        },
+        {
+          "path": "project.spec.json",
+          "sha256": "e4f190192cd31299374a4d912b812466ae5905db11764e33c3abbb15c571a840"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/AdressenSpringApplication.java",
+          "sha256": "2d0b6c42b095fa7af2ae73c6c4337fe03ad50b3af3ea4317de0b1285e6a72974"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/H2TcpServerConfig.java",
+          "sha256": "24b3f1d37d79bae0cd82ab32c069d15da26e5ceebe9134a0d59c39cd4f757a0c"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityConfig.java",
+          "sha256": "601453927a989f40da22ef0b9c59fe1c66bb6ab93b063f6035176045cba691c1"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/config/SecurityStore.java",
+          "sha256": "b348a739a60092918c898f2b16b5e66a0d1f0b5d7581871336ba88223907dafb"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/GlobalExceptionHandler.java",
+          "sha256": "122a8dd04d78e08e177f804632cbcc2206de5b7c633def3667ed1ae9a771d546"
+        },
+        {
+          "path": "src/main/java/ch/example/adressen/controller/SecurityController.java",
+          "sha256": "d29b37794b9deee910313c884cc55947802b5eef6dd0941a8d1ae25568041dea"
+        },
+        {
+          "path": "src/main/resources/application.yml",
+          "sha256": "7277c38e58433198d33a6d089a2a10da60d7b6d3f43efed8de5e9f1462053a61"
+        },
+        {
+          "path": "src/main/resources/static/change-password.html",
+          "sha256": "3d1d8b277ea1e58fcd3adc9e8ded40ffe74d09d0bbf9652b2f80beb8065e9283"
+        },
+        {
+          "path": "src/main/resources/static/login.html",
+          "sha256": "3a4ee118d3d92bff1af962ee99b6d09e7417d4daa00decd81da1b5b45d8bd664"
+        },
+        {
+          "path": "src/test/java/ch/example/adressen/AdressenSpringApplicationTests.java",
+          "sha256": "ba53f81412555999dad75cbeaa487c21a18540545d40adce54f15c66150e3e90"
+        },
+        {
+          "path": "src/test/resources/application.properties",
+          "sha256": "6036aebd3f71ae616a37373ba989abdd62644db1e583e2b14276508660936bc9"
+        }
+      ]
+    }
+  ]
+}

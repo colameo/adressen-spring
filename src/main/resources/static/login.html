@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in</title>
+  <link rel="stylesheet" href="webjars/bootstrap/5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="login-page">
+  <main class="container py-5" style="max-width: 26rem">
+    <h1 class="h3 mb-4 text-center">Sign in</h1>
+    <p class="error alert alert-danger" id="error" hidden>The user name or the password is not right.</p>
+    <form class="card card-body shadow-sm d-grid gap-3" method="post" action="login">
+      <label>User name
+        <input class="form-control" name="username" autocomplete="username" autofocus required>
+      </label>
+      <label>Password
+        <input class="form-control" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <div class="buttons d-grid"><button type="submit" class="btn btn-primary">Sign in</button></div>
+    </form>
+  </main>
+  <script>if (location.search.includes("error")) document.getElementById("error").hidden = false;</script>
+</body>
+</html>
